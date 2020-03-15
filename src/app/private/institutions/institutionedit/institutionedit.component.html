@@ -1,0 +1,104 @@
+<h1>Institution</h1>
+
+<div class="row" style="margin-top: 30px;" >
+  <div class="col-5 container mx-auto" >
+    <div class="row justify-content-center align-items-center">
+      <label class="col-5" for="company_name">company_name:</label>
+      <input class="col-7" type="text" [(ngModel)]="institution.company_name" id="company_name">
+
+      <label class="col-5" for="fantasy_name">fantasy_name:</label>
+      <input class="col-7" type="text" [(ngModel)]="institution.fantasy_name" id="fantasy_name">
+
+      <label class="col-5" for="cnpj">cnpj:</label>
+      <input class="col-7" type="text" [(ngModel)]="institution.cnpj" id="cnpj">
+
+      <label class="col-5" for="goal">goal:</label>
+      <input class="col-7" type="text" [(ngModel)]="institution.goal" id="goal">
+
+      <label class="col-5" for="aimed_people">aimed_people:</label>
+      <input class="col-7" type="text" [(ngModel)]="institution.aimed_people" id="aimed_people">
+
+      <label class="col-5" for="aimed_people_age">aimed_people_age:</label>
+      <input class="col-7" type="text" [(ngModel)]="institution.aimed_people_age" id="aimed_people_age">
+
+      <label class="col-5" for="capacity_free">capacity_free:</label>
+      <input class="col-7" type="text" [(ngModel)]="institution.capacity_free" id="capacity_free">
+
+      <label class="col-5" for="capacity_free_M">capacity_free_M:</label>
+      <input class="col-7" type="text" [(ngModel)]="institution.capacity_free_M" id="capacity_free_M">
+
+      <label class="col-5" for="capacity_free_F">capacity_free_F:</label>
+      <input class="col-7" type="text" [(ngModel)]="institution.capacity_free_F" id="capacity_free_F">
+
+      <label class="col-5" for="capacity_used">capacity_used:</label>
+      <input class="col-7" type="text" [(ngModel)]="institution.capacity_used" id="capacity_used">
+
+      <label class="col-5" for="capacity_used_M">capacity_used_M:</label>
+      <input class="col-7" type="text" [(ngModel)]="institution.capacity_used_M" id="capacity_used_M">
+
+      <label class="col-5" for="capacity_used_F">capacity_used_F:</label>
+      <input class="col-7" type="text" [(ngModel)]="institution.capacity_used_F" id="capacity_used_F">
+
+      <label class="col-5" for="email">email:</label>
+      <input class="col-7" type="text" [(ngModel)]="institution.communication.email" id="email">
+
+      <label class="col-5" for="telefone">telefone:</label>
+      <input class="col-7" type="text" [(ngModel)]="institution.communication.telefone" id="telefone">
+
+      <label class="col-5" for="fax">fax:</label>
+      <input class="col-7" type="text" [(ngModel)]="institution.communication.fax" id="fax">
+
+      <label class="col-5" for="address">address:</label>
+      <input class="col-7" type="text" [(ngModel)]="institution.address.address" id="address">
+
+      <label class="col-5" for="number">number:</label>
+      <input class="col-7" type="text" [(ngModel)]="institution.address.number" id="number">
+
+      <label class="col-5" for="district">district:</label>
+      <input class="col-7" type="text" [(ngModel)]="institution.address.district" id="district">
+
+      <label class="col-5" for="cep">cep:</label>
+      <input class="col-7" type="text" [(ngModel)]="institution.address.cep" id="cep">
+
+      <label class="col-5" for="city">city:</label>
+      <input class="col-7" type="text" [(ngModel)]="institution.address.city" id="city">
+
+      <label class="col-5" for="state">state:</label>
+      <input class="col-7" type="text" [(ngModel)]="institution.address.state" id="state">
+
+      <label class="col-5" for="country">country:</label>
+      <input class="col-7" type="text" [(ngModel)]="institution.address.country" id="country">
+
+      <label class="col-5" for="latitude">latitude:</label>
+      <input class="col-7" type="text" [(ngModel)]="institution.address.latitude" id="latitude">
+
+      <label class="col-5" for="longitude">longitude:</label>
+      <input class="col-7" type="text" [(ngModel)]="institution.address.longitude" id="longitude">
+
+      <label class="col-12 mt-3">contact_people: </label>
+      <div class="col-12 container">
+        <div class="row" *ngFor="let contact of institution.contact_people">
+          <span class="col-11">{{ contact.email }}</span><i (click)="removeExpert(contact.id)" class="fa fa-minus-circle text-danger col-1"></i>
+        </div>
+      </div>
+      <input class="col-11" type="text" #contact_email><i (click)="addExpert(contact_email.value)" class="fa fa-plus-circle text-success col-1"></i>
+
+      <label class="col-12 mt-3">technical_manager: </label>
+      <div class="col-12 container">
+        <div class="row" *ngFor="let manager of institution.technical_manager">
+          <span class="col-11">{{ manager.email }}</span><i (click)="removeExpert(manager.id, true)" class="fa fa-minus-circle text-danger col-1"></i>
+        </div>
+      </div>
+      <input class="col-11" type="text" #manager_email><i (click)="addExpert(manager_email.value, true)" class="fa fa-plus-circle text-success col-1"></i>
+
+
+      <label class="col-5" for="legal_nature">legal_nature:</label>
+      <input class="col-7" type="text" [(ngModel)]="institution.legal_nature" id="legal_nature">
+
+      <label class="col-5" for="note">note:</label>
+      <input class="col-7" type="text" [(ngModel)]="institution.note" id="note">
+
+      <button class="btn btn-success mx-auto mb-5" (click)="salvar()">Salvar</button>
+    </div>
+  </div>
+</div>

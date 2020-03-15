@@ -1,0 +1,50 @@
+<h1>Activity</h1>
+
+<div class="row" style="margin-top: 30px;" >
+  <div class="col-5 container mx-auto" >
+    <div class="row justify-content-center align-items-center">
+      <label class="col-5" for="title">Title:</label>
+      <input class="col-7" type="text" [(ngModel)]="activity.title" id="title">
+
+      <label class="col-5" for="description">Description:</label>
+      <input class="col-7" type="text" [(ngModel)]="activity.description" id="description">
+
+      <label class="col-5" for="general_activity_objective">General Activity Objective:</label>
+      <input class="col-7" type="text" [(ngModel)]="activity.general_activity_objective" id="general_activity_objective">
+
+      <label class="col-12 mt-3">Characteristics: </label>
+      <div class="col-12 container">
+        <div class="row" *ngFor="let characteristic of activity.characteristic">
+          <span class="col-11">{{ characteristic.description }}</span><i (click)="removeDetail(characteristic.id, 'characteristic')" class="fa fa-minus-circle text-danger col-1"></i>
+        </div>
+      </div>
+      <input class="col-11" type="text" #characteristic><i (click)="addDetail(characteristic.value, 'characteristic')" class="fa fa-plus-circle text-success col-1"></i>
+
+      <label class="col-12 mt-3">Benefit: </label>
+      <div class="col-12 container">
+        <div class="row" *ngFor="let benefit of activity.benefit">
+          <span class="col-11">{{ benefit.description }}</span><i (click)="removeDetail(benefit.id, 'benefit')" class="fa fa-minus-circle text-danger col-1"></i>
+        </div>
+      </div>
+      <input class="col-11" type="text" #benefit><i (click)="addDetail(benefit.value, 'benefit')" class="fa fa-plus-circle text-success col-1"></i>
+
+      <label class="col-12 mt-3">Restriction: </label>
+      <div class="col-12 container">
+        <div class="row" *ngFor="let restriction of activity.restriction">
+          <span class="col-11">{{ restriction.description }}</span><i (click)="removeDetail(restriction.id, 'restriction')" class="fa fa-minus-circle text-danger col-1"></i>
+        </div>
+      </div>
+      <input class="col-11" type="text" #restriction><i (click)="addDetail(characteristic.value, 'restriction')" class="fa fa-plus-circle text-success col-1"></i>
+
+      <label class="col-12 mt-3">Type: </label>
+      <div class="col-12 container">
+        <div class="row" *ngFor="let type of activity.type">
+          <span class="col-11">{{ type.description }}</span><i (click)="removeDetail(type.id, 'type')" class="fa fa-minus-circle text-danger col-1"></i>
+        </div>
+      </div>
+      <input class="col-11" type="text" #type><i (click)="addDetail(type.value, 'type')" class="fa fa-plus-circle text-success col-1"></i>
+
+      <button class="btn btn-success mx-auto" (click)="salvar()">Salvar</button>
+    </div>
+  </div>
+</div>
