@@ -1,48 +1,82 @@
-<h1>Activity</h1>
+<h1>location</h1>
 
-<div class="row" style="margin-top: 30px;" >
+<div class="row mb-5" style="margin-top: 30px;" >
   <div class="col-5 container mx-auto" >
     <div class="row justify-content-center align-items-center">
       <label class="col-5" for="title">Title:</label>
-      <input class="col-7" type="text" [(ngModel)]="activity.title" id="title">
+      <input class="col-7" type="text" [(ngModel)]="location.name" id="title">
 
       <label class="col-5" for="description">Description:</label>
-      <input class="col-7" type="text" [(ngModel)]="activity.description" id="description">
+      <input class="col-7" type="text" [(ngModel)]="location.parking" id="description">
 
-      <label class="col-5" for="general_activity_objective">General Activity Objective:</label>
-      <input class="col-7" type="text" [(ngModel)]="activity.general_activity_objective" id="general_activity_objective">
+      <label class="col-5" for="email">email:</label>
+      <input class="col-7" type="text" [(ngModel)]="location.communication.email" id="email">
 
-      <label class="col-12 mt-3">Characteristics: </label>
-      <div class="col-12 container">
-        <div class="row" *ngFor="let characteristic of activity.characteristic">
-          <span class="col-11">{{ characteristic.description }}</span><i (click)="removeDetail(characteristic.id, 'characteristic')" class="fa fa-minus-circle text-danger col-1"></i>
+      <label class="col-5" for="telefone">telefone:</label>
+      <input class="col-7" type="text" [(ngModel)]="location.communication.telefone" id="telefone">
+
+      <label class="col-5" for="fax">fax:</label>
+      <input class="col-7" type="text" [(ngModel)]="location.communication.fax" id="fax">
+
+      <label class="col-5" for="address">address:</label>
+      <input class="col-7" type="text" [(ngModel)]="location.address.address" id="address">
+
+      <label class="col-5" for="number">number:</label>
+      <input class="col-7" type="text" [(ngModel)]="location.address.number" id="number">
+
+      <label class="col-5" for="district">district:</label>
+      <input class="col-7" type="text" [(ngModel)]="location.address.district" id="district">
+
+      <label class="col-5" for="cep">cep:</label>
+      <input class="col-7" type="text" [(ngModel)]="location.address.cep" id="cep">
+
+      <label class="col-5" for="city">city:</label>
+      <input class="col-7" type="text" [(ngModel)]="location.address.city" id="city">
+
+      <label class="col-5" for="state">state:</label>
+      <input class="col-7" type="text" [(ngModel)]="location.address.state" id="state">
+
+      <label class="col-5" for="country">country:</label>
+      <input class="col-7" type="text" [(ngModel)]="location.address.country" id="country">
+
+      <label class="col-5" for="latitude">latitude:</label>
+      <input class="col-7" type="text" [(ngModel)]="location.address.latitude" id="latitude">
+
+      <label class="col-5" for="longitude">longitude:</label>
+      <input class="col-7" type="text" [(ngModel)]="location.address.longitude" id="longitude">
+
+      <label class="col-5">Instituição: </label>
+      <input class="col-6" type="text" #institution_search>
+      <i (click)="searchInstitution(institution_search.value)" class="col-1 fa fa-search"></i>
+
+      <div class="col-12 container" *ngIf="location.institution.id">
+        <div class="row">
+          <span class="col-11">{{ location.institution.company_name }}</span><i (click)="removeInstitution()" class="fa fa-minus-circle text-danger col-1"></i>
         </div>
       </div>
-      <input class="col-11" type="text" #characteristic><i (click)="addDetail(characteristic.value, 'characteristic')" class="fa fa-plus-circle text-success col-1"></i>
 
-      <label class="col-12 mt-3">Benefit: </label>
-      <div class="col-12 container">
-        <div class="row" *ngFor="let benefit of activity.benefit">
-          <span class="col-11">{{ benefit.description }}</span><i (click)="removeDetail(benefit.id, 'benefit')" class="fa fa-minus-circle text-danger col-1"></i>
+      <div class="col-12 container" *ngFor="let result of searchResults">
+        <div class="row">
+          <label class="col-11">{{ result.company_name }}</label>
+          <i (click)="selectInstitution(result.id, result.company_name)" class="col-1 fa fa-plus-circle text-success col-1"></i>
         </div>
       </div>
-      <input class="col-11" type="text" #benefit><i (click)="addDetail(benefit.value, 'benefit')" class="fa fa-plus-circle text-success col-1"></i>
 
-      <label class="col-12 mt-3">Restriction: </label>
+      <label class="col-12 mt-3">contact_people: </label>
       <div class="col-12 container">
-        <div class="row" *ngFor="let restriction of activity.restriction">
-          <span class="col-11">{{ restriction.description }}</span><i (click)="removeDetail(restriction.id, 'restriction')" class="fa fa-minus-circle text-danger col-1"></i>
+        <div class="row" *ngFor="let contact of location.contact_people">
+          <span class="col-11">{{ contact.email }}</span><i (click)="removeExpert(contact.id)" class="fa fa-minus-circle text-danger col-1"></i>
         </div>
       </div>
-      <input class="col-11" type="text" #restriction><i (click)="addDetail(characteristic.value, 'restriction')" class="fa fa-plus-circle text-success col-1"></i>
+      <input class="col-11" type="text" #contact_email><i (click)="addExpert(contact_email.value)" class="fa fa-plus-circle text-success col-1"></i>
 
-      <label class="col-12 mt-3">Type: </label>
+      <label class="col-12 mt-3">technical_manager: </label>
       <div class="col-12 container">
-        <div class="row" *ngFor="let type of activity.type">
-          <span class="col-11">{{ type.description }}</span><i (click)="removeDetail(type.id, 'type')" class="fa fa-minus-circle text-danger col-1"></i>
+        <div class="row" *ngFor="let manager of location.technical_manager">
+          <span class="col-11">{{ manager.email }}</span><i (click)="removeExpert(manager.id, true)" class="fa fa-minus-circle text-danger col-1"></i>
         </div>
       </div>
-      <input class="col-11" type="text" #type><i (click)="addDetail(type.value, 'type')" class="fa fa-plus-circle text-success col-1"></i>
+      <input class="col-11" type="text" #manager_email><i (click)="addExpert(manager_email.value, true)" class="fa fa-plus-circle text-success col-1"></i>
 
       <button class="btn btn-success mx-auto" (click)="salvar()">Salvar</button>
     </div>

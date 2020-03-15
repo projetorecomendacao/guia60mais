@@ -88,10 +88,7 @@ export class InstitutioneditComponent implements OnInit {
     let aux: string;
     if (isManager) aux = 'technical_manager';
     else aux = 'contact_people';
-    this.http.post(REST_URL + 'experts/get_or_create/', { email }).subscribe(data => {
-      console.log(data);
-      this.institution[aux].push(data);
-    });
+    this.http.post(REST_URL + 'experts/get_or_create/', { email }).subscribe(data => this.institution[aux].push(data));
   }
 
   removeExpert(id: number, isManager: boolean = false) {
