@@ -3,46 +3,46 @@
 <div class="row mb-5" style="margin-top: 30px;" >
   <div class="col-5 container mx-auto" >
     <div class="row justify-content-center align-items-center">
-      <label class="col-5" for="title">Title:</label>
+      <label class="col-5" for="title">Nome do Local:</label>
       <input class="col-7" type="text" [(ngModel)]="location.name" id="title">
 
-      <label class="col-5" for="description">Description:</label>
+      <label class="col-5" for="description">Estacionamento:</label>
       <input class="col-7" type="text" [(ngModel)]="location.parking" id="description">
 
-      <label class="col-5" for="email">email:</label>
+      <label class="col-5" for="email">E-mail:</label>
       <input class="col-7" type="text" [(ngModel)]="location.communication.email" id="email">
 
-      <label class="col-5" for="telefone">telefone:</label>
+      <label class="col-5" for="telefone">Telefone:</label>
       <input class="col-7" type="text" [(ngModel)]="location.communication.telefone" id="telefone">
 
-      <label class="col-5" for="fax">fax:</label>
+      <label class="col-5" for="fax">Fax:</label>
       <input class="col-7" type="text" [(ngModel)]="location.communication.fax" id="fax">
 
-      <label class="col-5" for="address">address:</label>
+      <label class="col-5" for="address">Endereço:</label>
       <input class="col-7" type="text" [(ngModel)]="location.address.address" id="address">
 
-      <label class="col-5" for="number">number:</label>
+      <label class="col-5" for="number">Número:</label>
       <input class="col-7" type="text" [(ngModel)]="location.address.number" id="number">
 
-      <label class="col-5" for="district">district:</label>
+      <label class="col-5" for="district">Bairro:</label>
       <input class="col-7" type="text" [(ngModel)]="location.address.district" id="district">
 
-      <label class="col-5" for="cep">cep:</label>
+      <label class="col-5" for="cep">CEP:</label>
       <input class="col-7" type="text" [(ngModel)]="location.address.cep" id="cep">
 
-      <label class="col-5" for="city">city:</label>
+      <label class="col-5" for="city">Cidade:</label>
       <input class="col-7" type="text" [(ngModel)]="location.address.city" id="city">
 
-      <label class="col-5" for="state">state:</label>
+      <label class="col-5" for="state">Estado:</label>
       <input class="col-7" type="text" [(ngModel)]="location.address.state" id="state">
 
-      <label class="col-5" for="country">country:</label>
+      <label class="col-5" for="country">País:</label>
       <input class="col-7" type="text" [(ngModel)]="location.address.country" id="country">
 
-      <label class="col-5" for="latitude">latitude:</label>
+      <label class="col-5" for="latitude">Latitude:</label>
       <input class="col-7" type="text" [(ngModel)]="location.address.latitude" id="latitude">
 
-      <label class="col-5" for="longitude">longitude:</label>
+      <label class="col-5" for="longitude">Longitude:</label>
       <input class="col-7" type="text" [(ngModel)]="location.address.longitude" id="longitude">
 
       <label class="col-5">Instituição: </label>
@@ -62,7 +62,7 @@
         </div>
       </div>
 
-      <label class="col-12 mt-3">contact_people: </label>
+      <label class="col-12 mt-3">Pessoas para Contato: </label>
       <div class="col-12 container">
         <div class="row" *ngFor="let contact of location.contact_people">
           <span class="col-11">{{ contact.email }}</span><i (click)="removeExpert(contact.id)" class="fa fa-minus-circle text-danger col-1"></i>
@@ -70,7 +70,7 @@
       </div>
       <input class="col-11" type="text" #contact_email><i (click)="addExpert(contact_email.value)" class="fa fa-plus-circle text-success col-1"></i>
 
-      <label class="col-12 mt-3">technical_manager: </label>
+      <label class="col-12 mt-3">Responsável Técnico: </label>
       <div class="col-12 container">
         <div class="row" *ngFor="let manager of location.technical_manager">
           <span class="col-11">{{ manager.email }}</span><i (click)="removeExpert(manager.id, true)" class="fa fa-minus-circle text-danger col-1"></i>

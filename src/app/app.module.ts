@@ -10,9 +10,9 @@ import { AuthServiceConfig, GoogleLoginProvider, SocialLoginModule } from 'angul
 import { AuthGuard } from './security/auth.guard';
 import { AuthInterceptor } from './security/auth.interceptor';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
-import { DAOService } from './shared/dao.service';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 
 
@@ -44,7 +44,6 @@ export function provideConfig() {
   ],
   providers: [
     AuthGuard,
-    DAOService,
     {
       provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true
     },

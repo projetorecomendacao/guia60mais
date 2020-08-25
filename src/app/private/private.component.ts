@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../security/user.service';
 
 @Component({
   selector: 'app-private',
-  templateUrl: './private.component.html',
-  styleUrls: ['./private.component.css']
+  templateUrl: './private.component.html'
 })
 export class PrivateComponent implements OnInit {
 
-  constructor() { }
+  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
   }

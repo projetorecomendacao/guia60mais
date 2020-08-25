@@ -1,0 +1,18 @@
+<!-- main app container -->
+<div class="card m-3">
+    <h5 class="card-header">Angular 10 Reactive Form Validation</h5>
+    <div class="card-body">
+        <form [formGroup]="regForm" (ngSubmit)="onSubmit()">
+            <div class="form-row">
+                <app-basico [RegForm]='regForm' campo='cityName' rotulo='Nome da cidade' [enviado]='submitted'></app-basico>
+                <app-basico [RegForm]='regForm' campo='state' rotulo='Estado' [enviado]='submitted'></app-basico>
+                <app-basico [RegForm]='regForm' campo='country' rotulo='País' [enviado]='submitted'></app-basico>
+            </div>
+            <div class="text-center">
+                <button class="btn btn-primary mr-1" type="submit">Register</button>
+                <button class="btn btn-secondary" type="reset" (click)="onReset()">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+

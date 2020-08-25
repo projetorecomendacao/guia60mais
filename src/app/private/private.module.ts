@@ -8,10 +8,6 @@ import { UserService } from '../security/user.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
-import { PhonetypeComponent } from './phonetype/phonetype.component';
-import { PhonetypeeditComponent } from './phonetype/phonetypeedit/phonetypeedit.component';
-import { EmailtypeComponent } from './emailtype/emailtype.component';
-import { EmailtypeeditComponent } from './emailtype/emailtypeedit/emailtypeedit.component';
 import { InstitutionsComponent } from './institutions/institutions.component';
 import { OffersComponent } from './offers/offers.component';
 import { LocationsComponent } from './locations/locations.component';
@@ -20,7 +16,10 @@ import { InstitutioneditComponent } from './institutions/institutionedit/institu
 import { OffereditComponent } from './offers/offeredit/offeredit.component';
 import { LocationeditComponent } from './locations/locationedit/locationedit.component';
 import { ActivityeditComponent } from './activities/activityedit/activityedit.component';
-
+import { CidadeComponent } from './cidade/cidade.component';
+import { CidadeEditComponent } from './cidade/cidade-edit/cidade-edit.component';
+import { ApiServiceService } from '../shared/api-service.service';
+import { BasicoComponent } from '../shared/formulario/basico/basico.component';
 
 
 
@@ -30,10 +29,6 @@ import { ActivityeditComponent } from './activities/activityedit/activityedit.co
     HomeComponent,
     NavbarComponent,
     FooterComponent,
-    PhonetypeComponent,
-    PhonetypeeditComponent,
-    EmailtypeComponent,
-    EmailtypeeditComponent,
     InstitutionsComponent,
     OffersComponent,
     LocationsComponent,
@@ -41,7 +36,10 @@ import { ActivityeditComponent } from './activities/activityedit/activityedit.co
     InstitutioneditComponent,
     OffereditComponent,
     LocationeditComponent,
-    ActivityeditComponent
+    ActivityeditComponent,
+    CidadeComponent,
+    CidadeEditComponent,
+    BasicoComponent,
   ],
   imports: [
     CommonModule,
@@ -50,7 +48,7 @@ import { ActivityeditComponent } from './activities/activityedit/activityedit.co
     NgbModule,
     FormsModule
   ],
-  providers: [UserService]
+  providers: [UserService, ApiServiceService]
 })
 
 export class PrivateModule { }

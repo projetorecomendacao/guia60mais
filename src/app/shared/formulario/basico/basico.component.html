@@ -1,0 +1,8 @@
+<div [formGroup]="RegForm">
+<div class='form-group col'> 
+    <label>{{rotulo}}</label>
+    <input type='text' [formControlName]="campo" class='form-control' [ngClass]="{ 'is-invalid': invalido() }" /> 
+    <div *ngIf='invalido()' class='invalid-feedback'>
+        <div> O campo precisa ser preenchido com um valor válido</div>
+    </div>
+</div>

@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
-import { DAOService } from '../shared/dao.service';
-import { SocialUser } from 'angularx-social-login';
 import { REST_URL_EXPERTS } from '../shared/REST_API_URLs';
+import { ApiServiceService } from '../shared/api-service.service';
 
 @Injectable()
 export class UserService {
 
   private _user: User = new User();
 
-  constructor(protected dao: DAOService) {
-    dao.postObject(REST_URL_EXPERTS + 'getSelf/', {}).subscribe(data => this._user = new User(data));
+  constructor(protected api: ApiServiceService) {
+    api.create(REST_URL_EXPERTS + '/getSelf', {}).subscribe(data => this._user = new User(data));
+    console.log(this.user);
   }
 
   get user(): User { return this._user; }
