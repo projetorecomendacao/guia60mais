@@ -1,18 +1,29 @@
 <!-- main app container -->
-<div class="card m-3">
-    <h5 class="card-header">Cidade</h5>
-    <div class="card-body">
-        <form [formGroup]="regForm" (ngSubmit)="onSubmit()">
-            <div class="form-row">
-                <app-basico [RegForm]='regForm' campo='cityName' rotulo='Nome da cidade' [enviado]='submitted'></app-basico>
-                <app-basico [RegForm]='regForm' campo='state' rotulo='Estado' [enviado]='submitted'></app-basico>
-                <app-basico [RegForm]='regForm' campo='country' rotulo='País' [enviado]='submitted'></app-basico>
-            </div>
-            <div class="text-center">
-                <button class="btn btn-primary mr-1" type="submit">Register</button>
-                <button class="btn btn-secondary" type="reset" (click)="onReset()">Cancel</button>
-            </div>
-        </form>
+<div class="container d-flex justify-content-center">
+    <div class="card my-4">
+        <h5 class="card-header text-center">Cidade</h5>
+        <div class="card-body">
+            <form [formGroup]="regForm" (ngSubmit)="onSubmit()">
+                <div class="form-row d-flex flex-column">
+                    <app-input label="Nome" errorMessage="Erro de teste"> 
+                        <input class="form-control" formControlName="cityName" placeholder="Nome" autocomplete="off"/>
+                    </app-input>
+                    <app-input label="Estado">
+                        <input class="form-control" formControlName="state" placeholder="Estado" autocomplete="off"/>
+                    </app-input>
+                    <app-input label="País">
+                        <input class="form-control" formControlName="country" placeholder="País" autocomplete="off"/>
+                    </app-input>
+                    <!-- <app-basico [RegForm]='regForm' campo='cityName' rotulo='Nome:' [enviado]='submitted'></app-basico> -->
+                    <!-- <app-basico [RegForm]='regForm' campo='state' rotulo='Estado:' [enviado]='submitted'></app-basico> -->
+                    <!-- <app-basico [RegForm]='regForm' campo='country' rotulo='País:' [enviado]='submitted'></app-basico> -->
+                </div>
+                <div class="text-center">
+                    <button class="btn btn-primary mr-1" type="submit">Register</button>
+                    <button class="btn btn-secondary" type="reset" (click)="onReset()">Cancel</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 

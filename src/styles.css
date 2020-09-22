@@ -36,3 +36,8 @@
   .btn:hover {
     background-color: RoyalBlue;
   }
+
+  /* Form Custom */
+  .form-max-width {
+      max-width: 500px;
+  }

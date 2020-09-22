@@ -6,15 +6,21 @@ import { FormGroup } from '@angular/forms';
   templateUrl: './basico.component.html'
 })
 export class BasicoComponent implements OnInit {
-  @ Input() RegForm : FormGroup;
-  @ Input() campo : string; 
-  @ Input() enviado : boolean;
+  @Input() RegForm: FormGroup;
+  
+  //
+  @Input() campo: string; 
+  
+  
+  @Input() enviado: boolean;
+  
+  //Rotulo a cima do input
   @ Input() rotulo : string;
 
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.RegForm);
+    // console.log(this.RegForm);
   }
 
   invalido(): boolean{
