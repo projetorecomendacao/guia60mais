@@ -1,104 +1,170 @@
-<h1>Instituições</h1>
+<div class="container">
+    <h2 class="text-center my-2 mb-1">Cadastro de Instituição</h2>
+    <div class="col">
+        <p class="required text-right col-12">Campos Obrigatórios (*)</p>
+        <form [formGroup]="institutionForm" (ngSubmit)="onSubmit()">
+            <!-- Instituição -->
+            <div class="row">
 
-<div class="row" style="margin-top: 30px;" >
-  <div class="col-5 container mx-auto" >
-    <div class="row justify-content-center align-items-center">
-      <label class="col-5" for="company_name">Razão Social:</label>
-      <input class="col-7" type="text" [(ngModel)]="institution.company_name" id="company_name">
+                <app-input class="col-md-6" label="Nome da Instituição" errorMessage="Campo Obrigatório">
+                    <input class="form-control" formControlName="company_name" placeholder="Nome da Instituição" autocomplete="off" />
+                </app-input>
 
-      <label class="col-5" for="fantasy_name">Nome Fantasia:</label>
-      <input class="col-7" type="text" [(ngModel)]="institution.fantasy_name" id="fantasy_name">
+                <app-input class="col-md-3" label="Nome Fantasia" errorMessage="Campo Obrigatório">
+                    <input class="form-control" formControlName="fantasy_name" placeholder="Nome Fantasia" autocomplete="off" />
+                </app-input>
 
-      <label class="col-5" for="cnpj">CNPJ:</label>
-      <input class="col-7" type="text" [(ngModel)]="institution.cnpj" id="cnpj">
+                <app-input class="col-md-3" label="CNPJ" errorMessage="Campo Obrigatório">
+                    <input class="form-control" formControlName="cnpj" placeholder="XX.XXX.XXX/XXXX-XX" autocomplete="off" />
+                </app-input>
+            </div>
 
-      <label class="col-5" for="goal">Objetivo institucional:</label>
-      <input class="col-7" type="text" [(ngModel)]="institution.goal" id="goal">
+            <div class="row">
+                <app-input class="col-md-6" label="Objetivo">
+                    <input class="form-control" formControlName="goal" placeholder="Objetivo" autocomplete="off" />
+                </app-input>
 
-      <label class="col-5" for="aimed_people">Público Alvo:</label>
-      <input class="col-7" type="text" [(ngModel)]="institution.aimed_people" id="aimed_people">
+                <app-input class="col-md-3" label="Público Alvo" errorMessage="Campo Obrigatório">
+                    <input class="form-control" formControlName="aimed_people" placeholder="Público Alvo" autocomplete="off" />
+                </app-input>
 
-      <label class="col-5" for="aimed_people_age">Idade Média do Público Alvo:</label>
-      <input class="col-7" type="text" [(ngModel)]="institution.aimed_people_age" id="aimed_people_age">
-
-      <label class="col-5" for="capacity_free">Capacidade Livre Total:</label>
-      <input class="col-7" type="text" [(ngModel)]="institution.capacity_free" id="capacity_free">
-
-      <label class="col-5" for="capacity_free_M">Capacidade Livre Homens:</label>
-      <input class="col-7" type="text" [(ngModel)]="institution.capacity_free_M" id="capacity_free_M">
-
-      <label class="col-5" for="capacity_free_F">Capacidade Livre Muheres:</label>
-      <input class="col-7" type="text" [(ngModel)]="institution.capacity_free_F" id="capacity_free_F">
-
-      <label class="col-5" for="capacity_used">Capacidade Utilizada Total:</label>
-      <input class="col-7" type="text" [(ngModel)]="institution.capacity_used" id="capacity_used">
-
-      <label class="col-5" for="capacity_used_M">Capacidade Utilizada Homens:</label>
-      <input class="col-7" type="text" [(ngModel)]="institution.capacity_used_M" id="capacity_used_M">
-
-      <label class="col-5" for="capacity_used_F">Capacidade Utilizada Mulheres:</label>
-      <input class="col-7" type="text" [(ngModel)]="institution.capacity_used_F" id="capacity_used_F">
-
-      <label class="col-5" for="email">E-mail</label>
-      <input class="col-7" type="text" [(ngModel)]="institution.communication.email" id="email">
-
-      <label class="col-5" for="telefone">Telefone:</label>
-      <input class="col-7" type="text" [(ngModel)]="institution.communication.telefone" id="telefone">
-
-      <label class="col-5" for="fax">Fax:</label>
-      <input class="col-7" type="text" [(ngModel)]="institution.communication.fax" id="fax">
-
-      <label class="col-5" for="address">Logradouro:</label>
-      <input class="col-7" type="text" [(ngModel)]="institution.address.address" id="address">
-
-      <label class="col-5" for="number">Número:</label>
-      <input class="col-7" type="text" [(ngModel)]="institution.address.number" id="number">
-
-      <label class="col-5" for="district">Bairro:</label>
-      <input class="col-7" type="text" [(ngModel)]="institution.address.district" id="district">
-
-      <label class="col-5" for="cep">CEP:</label>
-      <input class="col-7" type="text" [(ngModel)]="institution.address.cep" id="cep">
-
-      <label class="col-5" for="city">Cidade:</label>
-      <input class="col-7" type="text" [(ngModel)]="institution.address.city" id="city">
-
-      <label class="col-5" for="state">Estado:</label>
-      <input class="col-7" type="text" [(ngModel)]="institution.address.state" id="state">
-
-      <label class="col-5" for="country">País:</label>
-      <input class="col-7" type="text" [(ngModel)]="institution.address.country" id="country">
-
-      <label class="col-5" for="latitude">Latitude:</label>
-      <input class="col-7" type="text" [(ngModel)]="institution.address.latitude" id="latitude">
-
-      <label class="col-5" for="longitude">Longitude:</label>
-      <input class="col-7" type="text" [(ngModel)]="institution.address.longitude" id="longitude">
-
-      <label class="col-12 mt-3">Pessoa para Contato: </label>
-      <div class="col-12 container">
-        <div class="row" *ngFor="let contact of institution.contact_people">
-          <span class="col-11">{{ contact.email }}</span><i (click)="removeExpert(contact.id)" class="fa fa-minus-circle text-danger col-1"></i>
-        </div>
-      </div>
-      <input class="col-11" type="text" #contact_email><i (click)="addExpert(contact_email.value)" class="fa fa-plus-circle text-success col-1"></i>
-
-      <label class="col-12 mt-3">Responsável Técnico: </label>
-      <div class="col-12 container">
-        <div class="row" *ngFor="let manager of institution.technical_manager">
-          <span class="col-11">{{ manager.email }}</span><i (click)="removeExpert(manager.id, true)" class="fa fa-minus-circle text-danger col-1"></i>
-        </div>
-      </div>
-      <input class="col-11" type="text" #manager_email><i (click)="addExpert(manager_email.value, true)" class="fa fa-plus-circle text-success col-1"></i>
+                <app-input class="col-md-3" label="Idade Média do Público Alvo" errorMessage="Campo Obrigatório">
+                    <input class="form-control" formControlName="aimed_people_age" placeholder="XX" autocomplete="off" type="number" />
+                </app-input>
+            </div>
 
 
-      <label class="col-5" for="legal_nature">Natureza Legal:</label>
-      <input class="col-7" type="text" [(ngModel)]="institution.legal_nature" id="legal_nature">
+            <hr>
 
-      <label class="col-5" for="note">Observações:</label>
-      <input class="col-7" type="text" [(ngModel)]="institution.note" id="note">
 
-      <button class="btn btn-success mx-auto mb-5" (click)="salvar()">Salvar</button>
+            <!-- Capacidade -->
+            <h5 class="text-center mb-1">Capacidade</h5>
+            <div class="row">
+                <app-input class="col-md-4" label="Livre Total">
+                    <input class="form-control" formControlName="capacity_free" placeholder="XX" autocomplete="off" type="number" />
+                </app-input>
+
+                <app-input class="col-md-4" label="Livre Homens">
+                    <input class="form-control" formControlName="capacity_free_m" placeholder="XX" autocomplete="off" type="number" />
+                </app-input>
+
+                <app-input class="col-md-4" label="Livre Mulheres">
+                    <input class="form-control" formControlName="capacity_free_f" placeholder="XX" autocomplete="off" type="number" />
+                </app-input>
+
+                <app-input class="col-md-4" label="Utilizada Total">
+                    <input class="form-control" formControlName="capacity_used" placeholder="XX" autocomplete="off" type="number" />
+                </app-input>
+
+                <app-input class="col-md-4" label="Utilizada Homens">
+                    <input class="form-control" formControlName="capacity_used_m" placeholder="XX" autocomplete="off" type="number" />
+                </app-input>
+
+                <app-input class="col-md-4" label="Utilizada Mulheres">
+                    <input class="form-control" formControlName="capacity_used_f" placeholder="XX" autocomplete="off" type="number" />
+                </app-input>
+            </div>
+
+            <hr>
+
+            <!-- Contato -->
+            <h5 class="text-center mb-1">Contato</h5>
+
+            <div class="row" formGroupName="contato">
+                <app-input class="col-md-6" label="Email" errorMessage="Campo Obrigatório">
+                    <input class="form-control" formControlName="email" placeholder="exemplo@exemplo.com" autocomplete="off" type="email" />
+                </app-input>
+
+                <app-input class="col-md-3" label="Telefone" errorMessage="Campo Obrigatório">
+                    <input class="form-control" formControlName="telefone" placeholder="(XX)XXXXX-XXXX" autocomplete="off" />
+                </app-input>
+
+                <app-input class="col-md-3" label="Fax">
+                    <input class="form-control" formControlName="fax" placeholder="Fax" autocomplete="off" />
+                </app-input>
+            </div>
+
+            <hr>
+
+            <!-- Endereço -->
+            <h5 class="text-center mb-1">Endereço</h5>
+            <div class="row" formGroupName="address">
+
+                <app-input class="col-md-5" label="Endereço" errorMessage="Campo Obrigatório">
+                    <input class="form-control" formControlName="address" placeholder="Endereço" autocomplete="off" />
+                </app-input>
+
+                <app-input class="col-md-2" label="Número" errorMessage="Campo Obrigatório">
+                    <input class="form-control" formControlName="number" placeholder="XX" autocomplete="off" type="number" />
+                </app-input>
+
+                <app-input class="col-md-5" label="Bairro" errorMessage="Campo Obrigatório">
+                    <input class="form-control" formControlName="district" placeholder="Endereço" autocomplete="off" />
+                </app-input>
+
+                <app-input class="col-md-2" label="CEP" errorMessage="Campo Obrigatório">
+                    <input class="form-control" formControlName="cep" placeholder="XX.XXX-XX" autocomplete="off" />
+                </app-input>
+
+                <app-input class="col-md-4" label="Cidade" errorMessage="Campo Obrigatório">
+                    <input class="form-control" formControlName="city" placeholder="Cidade" autocomplete="off" />
+                </app-input>
+
+                <app-input class="col-md-3" label="Estado" errorMessage="Campo Obrigatório">
+                    <input class="form-control" formControlName="state" placeholder="Estado" autocomplete="off" />
+                </app-input>
+
+                <app-input class="col-md-3" label="País" errorMessage="Campo Obrigatório">
+                    <input class="form-control" formControlName="country" placeholder="País" autocomplete="off" />
+                </app-input>
+
+                <app-input class="col-md-2" label="Latitude">
+                    <input class="form-control" formControlName="latitude" placeholder="Latitude" autocomplete="off" />
+                </app-input>
+
+                <app-input class="col-md-2" label="Longitude">
+                    <input class="form-control" formControlName="longitude" placeholder="Longitude" autocomplete="off" />
+                </app-input>
+            </div>
+
+            <hr>
+
+            <!-- Pessoas -->
+
+            <div formGroupName="contact_people">
+                <h5 class="text-center mb-1">Pessoas Para Contato</h5>
+                <app-input label="Pessoa para Contato">
+                    <input class="form-control" formControlName="email" placeholder="exemplo@exemplo.com" autocomplete="off" type="email" />
+                </app-input>
+            </div>
+
+            <hr>
+
+            <div formGroupName="contact_people ">
+                <h5 class="text-center mb-1">Responsáveis Técnicos</h5>
+                <app-input label="Pessoa para Contato ">
+                    <input class="form-control" formControlName="email" placeholder="exemplo@exemplo.com" autocomplete="off" type="email" />
+                </app-input>
+            </div>
+
+            <hr>
+
+            <!-- Informações -->
+
+            <h5 class="text-center mb-1">Informações</h5>
+            <app-input label="Natureza Legal">
+                <input class="form-control" formControlName="legal_nature" placeholder="Natureza Legal" autocomplete="off" />
+            </app-input>
+
+            <app-input label="Observações">
+                <input class="form-control" formControlName="note" placeholder="Observações..." autocomplete="off" />
+            </app-input>
+
+            <!-- Botões -->
+            <div class="text-center mb-4">
+                <button class="btn btn-primary btn-lg mr-1" type="submit " [disabled]="!institutionForm.valid ">Cadastrar</button>
+                <button class="btn btn-secondary btn-lg custom-danger " type="reset " (click)="backPage() ">Cancelar    </button>
+            </div>
+        </form>
     </div>
-  </div>
 </div>

@@ -1,15 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiServiceService } from '../../../shared/api-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
-//Estrutura do registro de dados..
-interface reg {
-    cityName: string;
-    state: string;
-    country: string;
-}
+import { City } from '../cidade.model';
 
 
 @Component({
@@ -18,10 +11,17 @@ interface reg {
 })
 
 export class CidadeEditComponent implements OnInit {
+    
+    city: City = {
+        id: (-1),
+        cityName: "",
+        state: "",
+        country: ""
+    };
+
+    // city?: City;
+
     regForm: FormGroup;
-    submitted = false;
-    id: number;
-    registro: reg;
     //mudar conforme o registro
     endPoint = 'cidades';
     fatherComponent = '/cidades';
@@ -41,16 +41,18 @@ export class CidadeEditComponent implements OnInit {
             country: ['', [Validators.required]],
         });
 
-        this.id = this.activateRoute.snapshot.params.id;
+        //Seta o id com base na rota
+        this.city.id = this.activateRoute.snapshot.params.id;       
 
-        if (this.id != -1) {
-            this.api.getOne(this.endPoint, this.id).subscribe(data => {
-                this.registro = data;
-                this.regForm = this.formBuilder.group({
-                    cityName: [this.registro.cityName, [Validators.required]],
-                    state: [this.registro.state, [Validators.required]],
-                    country: [this.registro.country, [Validators.required]],
-                });
+        // Caso o id da cidade ja exista preenche o formulário com os da requisição
+        if (this.city.id != -1) {
+            this.api.getOne(this.endPoint, this.city.id).subscribe(data => {
+                this.city = data;
+                this.regForm.patchValue({
+                    cityName: this.city.cityName,
+                    state: this.city.state,
+                    country: this.city.country,
+                })
             });
         }
     }
@@ -59,41 +61,38 @@ export class CidadeEditComponent implements OnInit {
     get f() { return this.regForm.controls; }
 
     update() {
-        //this.api.update(this.endPoint, this.id, this.registro).subscribe();
-        this.api.update(this.endPoint, this.id, this.registro).subscribe();
+        this.api.update(this.endPoint, this.city.id, this.city).subscribe();
     }
 
     create() {
-        //this.api.create(this.endPoint, this.registro).subscribe();
-        this.api.create(this.endPoint, this.registro).subscribe();
-        console.log('criou??');
+        this.api.create(this.endPoint, this.city).subscribe();
     }
 
-
+    /* @description: Submete o form de cadastro de cidade.
+     * @return {void};
+     */
     onSubmit() {
-        //muda o status do form
-        this.submitted = true;
-
         // stop here if form is invalid
         if (this.regForm.invalid) {
             return;
         }
         //passa os valores do form para o modelo
-        this.registro = this.regForm.value;
+        this.city = this.regForm.value;
 
-        //teste
-        console.log(this.regForm.value);
-        console.log(this.registro);
-
-        if (this.id != -1) {
+        // Se o id ja existir atualiza a cidade existente se não cria uma nova cidade
+        if (this.city.id != -1) {
             this.update();
         } else {
             this.create();
         }
-        this.router.navigate([this.fatherComponent]);
+
+        this.backPage();
     }
 
-    onReset() {
+    /*
+     * @desciption: Retorna para a página anterior
+     */
+    backPage() {
         this.router.navigate([this.fatherComponent]);
     }
 }
