@@ -129,22 +129,56 @@
 
             <hr>
 
-            <!-- Pessoas -->
+            <!-- Pessoas Contato -->
 
-            <div formGroupName="contact_people">
-                <h5 class="text-center mb-1">Pessoas Para Contato</h5>
-                <app-input label="Pessoa para Contato">
-                    <input class="form-control" formControlName="email" placeholder="exemplo@exemplo.com" autocomplete="off" type="email" />
-                </app-input>
+            <div>
+                <div class="row justify-content-center">
+                    <h5 class="text-center mb-1">Pessoas Para Contato</h5>
+
+                    <button class="btn btn-primary ml-2 btn-sm rounded-circle" (click)="addContact()"><i class="fa fa-plus"></i></button>
+                </div>
+
+                <div formArrayName="contact_people">
+                    <div *ngFor="let person of contact_people.controls; let i=index">
+                        <div class="d-flex flex-row align-items-center" [formGroupName]="i">
+                            <app-input label="Email" class="w-100">
+                                <input class="form-control" formControlName="email" placeholder="exemplo@exemplo.com" autocomplete="off" type="email" />
+                            </app-input>
+
+                            <button class="btn btn-secondary btn-mg mt-3 rm-contact" (click)="removeContact(i)">
+                                <i class="fa fa-remove"></i>
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
             </div>
 
             <hr>
 
-            <div formGroupName="technical_manager">
-                <h5 class="text-center mb-1">Responsáveis Técnicos</h5>
-                <app-input label="Pessoa para Contato ">
-                    <input class="form-control" formControlName="email" placeholder="exemplo@exemplo.com" autocomplete="off" type="email" />
-                </app-input>
+            <!-- Tecnicos Contato -->
+
+            <div>
+                <div class="row justify-content-center">
+                    <h5 class="text-center mb-1">Responsáveis Técnicos</h5>
+
+                    <button class="btn btn-primary ml-2 btn-sm rounded-circle" (click)="addManager()"><i class="fa fa-plus"></i></button>
+                </div>
+
+                <div formArrayName="technical_manager">
+                    <div *ngFor="let person of technical_manager.controls; let i=index">
+                        <div class="d-flex flex-row align-items-center" [formGroupName]="i">
+                            <app-input label="Email" class="w-100">
+                                <input class="form-control" formControlName="email" placeholder="exemplo@exemplo.com" autocomplete="off" type="email" />
+                            </app-input>
+
+                            <button class="btn btn-secondary btn-mg mt-3 rm-contact" (click)="removeManager(i)">
+                                <i class="fa fa-remove"></i>
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
             </div>
 
             <hr>

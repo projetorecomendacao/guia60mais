@@ -105,3 +105,12 @@ input[type=number] {
     -moz-appearance: textfield;
     appearance: textfield;
 }
+
+.rm-contact {
+    border-radius: 0px 5px 5px 0px;
+}
+
+.rm-contact:hover {
+    background-color: red;
+    border-color: red;
+}

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiServiceService } from '../../../shared/api-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { City } from '../cidade.model';
 
+import {  } from '@angular/forms';
 
 @Component({
     selector: 'app-cidadeedit',
@@ -56,15 +57,7 @@ export class CidadeEditComponent implements OnInit {
     }
 
 
-    get f() { return this.regForm.controls; }
-
-    update() {
-        this.api.update(this.endPoint, this.id, this.city).subscribe();
-    }
-
-    create() {
-        this.api.create(this.endPoint, this.city).subscribe();
-    }
+    // get f() { return this.regForm.controls; }
 
     /* @description: Submete o form de cadastro de cidade.
      * @return {void};
@@ -85,6 +78,14 @@ export class CidadeEditComponent implements OnInit {
         }
 
         this.backPage();
+    }
+
+    update() {
+        this.api.update(this.endPoint, this.id, this.city).subscribe();
+    }
+
+    create() {
+        this.api.create(this.endPoint, this.city).subscribe();
     }
 
     /*

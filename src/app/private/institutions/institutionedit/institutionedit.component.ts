@@ -5,7 +5,7 @@ import { REST_URL } from '../../../shared/REST_API_URLs';
 import { HttpClient } from '@angular/common/http';
 
 import { Institution } from '../instituitions.model';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
     selector: 'app-institutionedit',
@@ -43,6 +43,9 @@ export class InstitutioneditComponent implements OnInit {
             this.api.getOne(this.endPoint, this.id).subscribe(data => {
                 this.institution = data;
             });
+        
+        console.log("Contact People:");
+        console.log(this.contact_people);
     }
 
     update() {
@@ -62,18 +65,65 @@ export class InstitutioneditComponent implements OnInit {
         this.router.navigate([this.fatherComponent]);
     }
 
-    addExpert(email: string, isManager: boolean = false) {
-        let aux: string;
-        if (isManager) aux = 'technical_manager';
-        else aux = 'contact_people';
-        this.http.post(REST_URL + 'experts/get_or_create/', { email }).subscribe(data => this.institution[aux].push(data));
+    // addExpert(email: string, isManager: boolean = false) {
+    //     let aux: string;
+    //     if (isManager) aux = 'technical_manager';
+    //     else aux = 'contact_people';
+    //     this.http.post(REST_URL + 'experts/get_or_create/', { email }).subscribe(data => this.institution[aux].push(data));
+    // }
+
+    // removeExpert(id: number, isManager: boolean = false) {
+    //     let aux: string;
+    //     if (isManager) aux = 'technical_manager';
+    //     else aux = 'contact_people';
+    //     if (this.institution.id) this.api.update('institutions', this.institution.id, this.institution).subscribe(_ => this.institution[aux].splice(this.institution[aux].findIndex(value => value.id === id), 1));
+    // }
+
+    get contact_people() {
+        return this.institutionForm.get('contact_people') as FormArray;
+    }
+    
+    get technical_manager() {
+        return this.institutionForm.get('technical_manager') as FormArray;
     }
 
-    removeExpert(id: number, isManager: boolean = false) {
-        let aux: string;
-        if (isManager) aux = 'technical_manager';
-        else aux = 'contact_people';
-        if (this.institution.id) this.api.update('institutions', this.institution.id, this.institution).subscribe(_ => this.institution[aux].splice(this.institution[aux].findIndex(value => value.id === id), 1));
+    /*
+     * @description: adiciona mais um campo para contato no form. 
+     */
+    addContact() {
+        this.contact_people.push(this.createPerson());
+    }
+
+    /*
+     * @description: remove um campo para contato no form. 
+     */
+    removeContact(index:number) {
+        this.contact_people.removeAt(index);
+    }
+
+    /*
+     * @description: adiciona mais um campo para responsavel tecnico no form. 
+     */
+    addManager() {
+        this.technical_manager.push(this.createPerson());
+    }
+
+    /*
+     * @description: remove um campo para responsável tecnico no form. 
+     */
+    removeManager(index:number) {
+        this.technical_manager.removeAt(index);
+    }
+
+    /*
+     *@ description: cria um Form group para cadastro de pessoas.
+     * Colocar dentro de um FormArray.
+     */
+    createPerson(): FormGroup {
+        return this.formBuilder.group({
+            name: [''],
+            email: ['', [Validators.pattern(this.emailPattern)]]
+        });
     }
 
     /* @description: Submete o form de cadastro de cidade.
@@ -82,7 +132,7 @@ export class InstitutioneditComponent implements OnInit {
     onSubmit() {
         // stop here if form is invalid
         if (this.institutionForm.invalid) {
-            return;
+            return undefined;
         }
         //passa os valores do form para o modelo
         this.institution = this.institutionForm.value;
@@ -137,14 +187,8 @@ export class InstitutioneditComponent implements OnInit {
                 latitude: [''],
                 longitude: ['']
             }),
-            contact_people: this.formBuilder.group({
-                id: ['', [Validators.pattern(this.numberPattern)]],
-                email: ['', [Validators.pattern(this.emailPattern)]]
-            }), //criar um array de pessoas
-            technical_manager: this.formBuilder.group({
-                id: ['', [Validators.pattern(this.numberPattern)]],
-                email: ['', [Validators.pattern(this.emailPattern)]]
-            }), //criar um array de tecnicos
+            contact_people: this.formBuilder.array([this.createPerson()]), //criar um array de pessoas
+            technical_manager: this.formBuilder.array([this.createPerson()]), //criar um array de tecnicos
             legal_nature: [''],
             note: [''],
         });
