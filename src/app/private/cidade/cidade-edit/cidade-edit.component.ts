@@ -12,16 +12,12 @@ import { City } from '../cidade.model';
 
 export class CidadeEditComponent implements OnInit {
     
-    city: City = {
-        id: (-1),
-        cityName: "",
-        state: "",
-        country: ""
-    };
-
-    // city?: City;
+    city: City;
 
     regForm: FormGroup;
+
+    id: number;
+
     //mudar conforme o registro
     endPoint = 'cidades';
     fatherComponent = '/cidades';
@@ -42,12 +38,14 @@ export class CidadeEditComponent implements OnInit {
         });
 
         //Seta o id com base na rota
-        this.city.id = this.activateRoute.snapshot.params.id;       
+        this.id = this.activateRoute.snapshot.params.id;   
 
         // Caso o id da cidade ja exista preenche o formulário com os da requisição
-        if (this.city.id != -1) {
-            this.api.getOne(this.endPoint, this.city.id).subscribe(data => {
+        if (this.id != -1) {
+            this.api.getOne(this.endPoint, this.id).subscribe(data => {
                 this.city = data;
+                console.log(">>>>>Testando Dados da API")
+                console.log(data);
                 this.regForm.patchValue({
                     cityName: this.city.cityName,
                     state: this.city.state,
@@ -61,7 +59,7 @@ export class CidadeEditComponent implements OnInit {
     get f() { return this.regForm.controls; }
 
     update() {
-        this.api.update(this.endPoint, this.city.id, this.city).subscribe();
+        this.api.update(this.endPoint, this.id, this.city).subscribe();
     }
 
     create() {
@@ -80,7 +78,7 @@ export class CidadeEditComponent implements OnInit {
         this.city = this.regForm.value;
 
         // Se o id ja existir atualiza a cidade existente se não cria uma nova cidade
-        if (this.city.id != -1) {
+        if (this.id) {
             this.update();
         } else {
             this.create();
