@@ -1,96 +1,97 @@
 import { Component, OnInit } from '@angular/core';
-import {ApiServiceService} from '../../../shared/api-service.service';
-import {ActivatedRoute, Router} from '@angular/router';
-import {HttpClient} from '@angular/common/http';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ApiServiceService } from '../../../shared/api-service.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
+import { City } from '../cidade.model';
 
-//Estrutura do registro de dados..
-interface reg {
-  cityName: string;
-  state: string;
-  country: string;
-}
-
+import {  } from '@angular/forms';
 
 @Component({
-  selector: 'app-cidadeedit',
-  templateUrl: './cidade-edit.component.html'
+    selector: 'app-cidadeedit',
+    templateUrl: './cidade-edit.component.html'
 })
 
 export class CidadeEditComponent implements OnInit {
-  regForm: FormGroup;
-  submitted = false;
-  id: number;
-  registro: reg;
-  //mudar conforme o registro
-  endPoint = 'cidades';
-  fatherComponent = '/cidades';
+    
+    city: City;
+
+    regForm: FormGroup;
+
+    id: number;
+
+    //mudar conforme o registro
+    endPoint = 'cidades';
+    fatherComponent = '/cidades';
 
 
-  constructor(private api: ApiServiceService,  
-              private activateRoute: ActivatedRoute, private router: Router, 
-              private formBuilder: FormBuilder) { 
+    constructor(private api: ApiServiceService,
+        private activateRoute: ActivatedRoute,
+        private router: Router,
+        private formBuilder: FormBuilder) {
+    }
 
-  }
 
-  ngOnInit(): void {
-    this.regForm = this.formBuilder.group({
-      cityName: ['',[Validators.required]],
-      state: ['',[Validators.required]],
-      country: ['',[Validators.required]],
-    });
-    this.id = this.activateRoute.snapshot.params.id;
-    if (this.id != -1 ) {
-      this.api.getOne(this.endPoint, this.id).subscribe(data => {
-        this.registro = data;
+    ngOnInit(): void {
         this.regForm = this.formBuilder.group({
-          cityName: [this.registro.cityName,[Validators.required]],
-          state: [this.registro.state,[Validators.required]],
-          country: [this.registro.country,[Validators.required]],
+            cityName: ['', [Validators.required]],
+            state: ['', [Validators.required]],
+            country: ['', [Validators.required]],
         });
-      });
+
+        //Seta o id com base na rota
+        this.id = this.activateRoute.snapshot.params.id;   
+
+        // Caso o id da cidade ja exista preenche o formulário com os da requisição
+        if (this.id != -1) {
+            this.api.getOne(this.endPoint, this.id).subscribe(data => {
+                this.city = data;
+                console.log(">>>>>Testando Dados da API")
+                console.log(data);
+                this.regForm.patchValue({
+                    cityName: this.city.cityName,
+                    state: this.city.state,
+                    country: this.city.country,
+                })
+            });
+        }
     }
-   } 
-  
-
-  get f() { return this.regForm.controls; }
-
-  update() {
-    //this.api.update(this.endPoint, this.id, this.registro).subscribe();
-    this.api.update(this.endPoint,this.id,this.registro).subscribe();;
-  }
-
-  create() {
-    //this.api.create(this.endPoint, this.registro).subscribe();
-    this.api.create(this.endPoint,this.registro).subscribe();;
-    console.log('criou??');
-  }
 
 
-  onSubmit() {
-    //muda o status do form
-    this.submitted = true;
+    // get f() { return this.regForm.controls; }
 
-    // stop here if form is invalid
-    if (this.regForm.invalid) {
-        return;
+    /* @description: Submete o form de cadastro de cidade.
+     * @return {void};
+     */
+    onSubmit() {
+        // stop here if form is invalid
+        if (this.regForm.invalid) {
+            return;
+        }
+        //passa os valores do form para o modelo
+        this.city = this.regForm.value;
+
+        // Se o id ja existir atualiza a cidade existente se não cria uma nova cidade
+        if (this.id) {
+            this.update();
+        } else {
+            this.create();
+        }
+
+        this.backPage();
     }
-    //passa os valores do form para o modelo
-    this.registro = this.regForm.value;
-    
-    //teste
-    console.log(this.regForm.value);
-    console.log(this.registro);
-    
-    if (this.id != -1) {
-      this.update();
-    } else {
-      this.create();
-    }
-    this.router.navigate([this.fatherComponent]);
-  }
 
-  onReset(){
-    this.router.navigate([this.fatherComponent]);
-  }
+    update() {
+        this.api.update(this.endPoint, this.id, this.city).subscribe();
+    }
+
+    create() {
+        this.api.create(this.endPoint, this.city).subscribe();
+    }
+
+    /*
+     * @desciption: Retorna para a página anterior
+     */
+    backPage() {
+        this.router.navigate([this.fatherComponent]);
+    }
 }

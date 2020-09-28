@@ -1,0 +1,10 @@
+<div class="form-group custom-input" [class.error]="hasError()">
+    <label>
+        {{label}}: <span class="required">*</span>
+    </label>
+
+    <ng-content></ng-content>
+    <span class="help-block" *ngIf="hasError()">
+        <i class="fa fa-remove"></i>{{errorMessage}}
+    </span>
+</div>

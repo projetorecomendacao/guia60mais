@@ -19,7 +19,9 @@ import { ActivityeditComponent } from './activities/activityedit/activityedit.co
 import { CidadeComponent } from './cidade/cidade.component';
 import { CidadeEditComponent } from './cidade/cidade-edit/cidade-edit.component';
 import { ApiServiceService } from '../shared/api-service.service';
+
 import { BasicoComponent } from '../shared/formulario/basico/basico.component';
+import { InputComponent } from '../shared/formulario/input/input.component';
 
 
 
@@ -40,6 +42,7 @@ import { BasicoComponent } from '../shared/formulario/basico/basico.component';
     CidadeComponent,
     CidadeEditComponent,
     BasicoComponent,
+    InputComponent,
   ],
   imports: [
     CommonModule,
