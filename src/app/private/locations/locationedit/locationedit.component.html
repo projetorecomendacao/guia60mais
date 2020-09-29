@@ -1,84 +1,150 @@
-<h1>Local</h1>
+<div class="container">
+    <h2 class="text-center my-2 mb-1">Cadastro de Local</h2>
 
-<div class="row mb-5" style="margin-top: 30px;" >
-  <div class="col-5 container mx-auto" >
-    <div class="row justify-content-center align-items-center">
-      <label class="col-5" for="title">Nome do Local:</label>
-      <input class="col-7" type="text" [(ngModel)]="location.name" id="title">
+    <div class="col">
+        <p class="required text-right col-12">Campos Obrigatórios (*)</p>
 
-      <label class="col-5" for="description">Estacionamento:</label>
-      <input class="col-7" type="text" [(ngModel)]="location.parking" id="description">
+        <form [formGroup]="locationForm" (ngSubmit)="onSubmit()">
+            <app-input label="Nome" errorMessage="Campo Obrigatório">
+                <input class="form-control" formControlName="name" placeholder="Nome do Local" autocomplete="off" />
+            </app-input>
 
-      <label class="col-5" for="email">E-mail:</label>
-      <input class="col-7" type="text" [(ngModel)]="location.communication.email" id="email">
+            <div class="row" formGroupName="communication">
+                <app-input class="col-md-6" label="Email" errorMessage="Campo Obrigatório">
+                    <input class="form-control" formControlName="email" placeholder="exemplo@exemplo.com" autocomplete="off" type="email" />
+                </app-input>
 
-      <label class="col-5" for="telefone">Telefone:</label>
-      <input class="col-7" type="text" [(ngModel)]="location.communication.telefone" id="telefone">
+                <app-input class="col-md-3" label="Telefone" errorMessage="Campo Obrigatório">
+                    <input class="form-control" formControlName="telefone" placeholder="(XX)XXXXX-XXXX" autocomplete="off" type="number" />
+                </app-input>
 
-      <label class="col-5" for="fax">Fax:</label>
-      <input class="col-7" type="text" [(ngModel)]="location.communication.fax" id="fax">
+                <app-input class="col-md-3" label="Fax">
+                    <input class="form-control" formControlName="fax" placeholder="Fax" autocomplete="off" />
+                </app-input>
+            </div>
 
-      <label class="col-5" for="address">Endereço:</label>
-      <input class="col-7" type="text" [(ngModel)]="location.address.address" id="address">
+            <app-input label="Estacionamento" errorMessage="Campo Obrigatório">
+                <input class="form-control" formControlName="parking" placeholder="Estacionamento" autocomplete="off" />
+            </app-input>
 
-      <label class="col-5" for="number">Número:</label>
-      <input class="col-7" type="text" [(ngModel)]="location.address.number" id="number">
+            <!-- Endereço -->
+            <h5 class="text-center mb-1">Endereço</h5>
+            <div class="row" formGroupName="address">
 
-      <label class="col-5" for="district">Bairro:</label>
-      <input class="col-7" type="text" [(ngModel)]="location.address.district" id="district">
+                <app-input class="col-md-5" label="Endereço" errorMessage="Campo Obrigatório">
+                    <input class="form-control" formControlName="address" placeholder="Endereço" autocomplete="off" />
+                </app-input>
 
-      <label class="col-5" for="cep">CEP:</label>
-      <input class="col-7" type="text" [(ngModel)]="location.address.cep" id="cep">
+                <app-input class="col-md-2" label="Número" errorMessage="Campo Obrigatório">
+                    <input class="form-control" formControlName="number" placeholder="XX" autocomplete="off" type="number" />
+                </app-input>
 
-      <label class="col-5" for="city">Cidade:</label>
-      <input class="col-7" type="text" [(ngModel)]="location.address.city" id="city">
+                <app-input class="col-md-5" label="Bairro" errorMessage="Campo Obrigatório">
+                    <input class="form-control" formControlName="district" placeholder="Endereço" autocomplete="off" />
+                </app-input>
 
-      <label class="col-5" for="state">Estado:</label>
-      <input class="col-7" type="text" [(ngModel)]="location.address.state" id="state">
+                <app-input class="col-md-2" label="CEP" errorMessage="Campo Obrigatório">
+                    <input class="form-control" formControlName="cep" placeholder="XX.XXX-XX" autocomplete="off" />
+                </app-input>
 
-      <label class="col-5" for="country">País:</label>
-      <input class="col-7" type="text" [(ngModel)]="location.address.country" id="country">
+                <app-input class="col-md-4" label="Cidade" errorMessage="Campo Obrigatório">
+                    <input class="form-control" formControlName="city" placeholder="Cidade" autocomplete="off" />
+                </app-input>
 
-      <label class="col-5" for="latitude">Latitude:</label>
-      <input class="col-7" type="text" [(ngModel)]="location.address.latitude" id="latitude">
+                <app-input class="col-md-3" label="Estado" errorMessage="Campo Obrigatório">
+                    <input class="form-control" formControlName="state" placeholder="Estado" autocomplete="off" />
+                </app-input>
 
-      <label class="col-5" for="longitude">Longitude:</label>
-      <input class="col-7" type="text" [(ngModel)]="location.address.longitude" id="longitude">
+                <app-input class="col-md-3" label="País" errorMessage="Campo Obrigatório">
+                    <input class="form-control" formControlName="country" placeholder="País" autocomplete="off" />
+                </app-input>
 
-      <label class="col-5">Instituição: </label>
-      <input class="col-6" type="text" #institution_search>
-      <i (click)="searchInstitution(institution_search.value)" class="col-1 fa fa-search"></i>
+                <app-input class="col-md-2" label="Latitude">
+                    <input class="form-control" formControlName="latitude" placeholder="Latitude" autocomplete="off" />
+                </app-input>
 
-      <div class="col-12 container" *ngIf="location.institution.id">
-        <div class="row">
-          <span class="col-11">{{ location.institution.company_name }}</span><i (click)="removeInstitution()" class="fa fa-minus-circle text-danger col-1"></i>
-        </div>
-      </div>
+                <app-input class="col-md-2" label="Longitude">
+                    <input class="form-control" formControlName="longitude" placeholder="Longitude" autocomplete="off" />
+                </app-input>
+            </div>
 
-      <div class="col-12 container" *ngFor="let result of searchResults">
-        <div class="row">
-          <label class="col-11">{{ result.company_name }}</label>
-          <i (click)="selectInstitution(result.id, result.company_name)" class="col-1 fa fa-plus-circle text-success col-1"></i>
-        </div>
-      </div>
+            <hr>
 
-      <label class="col-12 mt-3">Pessoas para Contato: </label>
-      <div class="col-12 container">
-        <div class="row" *ngFor="let contact of location.contact_people">
-          <span class="col-11">{{ contact.email }}</span><i (click)="removeExpert(contact.id)" class="fa fa-minus-circle text-danger col-1"></i>
-        </div>
-      </div>
-      <input class="col-11" type="text" #contact_email><i (click)="addExpert(contact_email.value)" class="fa fa-plus-circle text-success col-1"></i>
+            <h5 class="text-center mb-1">Instituição</h5>
 
-      <label class="col-12 mt-3">Responsável Técnico: </label>
-      <div class="col-12 container">
-        <div class="row" *ngFor="let manager of location.technical_manager">
-          <span class="col-11">{{ manager.email }}</span><i (click)="removeExpert(manager.id, true)" class="fa fa-minus-circle text-danger col-1"></i>
-        </div>
-      </div>
-      <input class="col-11" type="text" #manager_email><i (click)="addExpert(manager_email.value, true)" class="fa fa-plus-circle text-success col-1"></i>
+            <div formGroupName="institution">
+                <app-input class="col-md-2" label="Instituição" errorMessage="Campo Obrigatório">
+                    <input class="form-control" formControlName="company_name" placeholder="Nome da Instituição" autocomplete="off" />
+                </app-input>
+            </div>
 
-      <button class="btn btn-success mx-auto" (click)="salvar()">Salvar</button>
+            <hr>
+
+            <!-- Pessoas Contato -->
+
+            <div>
+                <div class="row justify-content-center">
+                    <h5 class="text-center mb-1">Pessoas Para Contato</h5>
+
+                    <button class="btn btn-primary ml-2 btn-sm rounded-circle" (click)="addContact()"><i
+                            class="fa fa-plus"></i></button>
+                </div>
+
+                <div formArrayName="contact_people">
+                    <div *ngFor="let person of contact_people.controls; let i=index">
+                        <div class="d-flex flex-row align-items-start" [formGroupName]="i">
+                            <app-input label="Email" class="w-100">
+                                <input class="form-control" formControlName="email" placeholder="exemplo@exemplo.com" autocomplete="off" type="email" />
+                            </app-input>
+
+                            <button class="btn btn-secondary btn-mg rm-contact rounded-circle" (click)="removeContact(i)">
+                                <i class="fa fa-remove"></i>
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+
+            <!-- Tecnicos Contato -->
+
+            <div>
+                <div class="row justify-content-center">
+                    <h5 class="text-center mb-1">Responsáveis Técnicos</h5>
+
+                    <button class="btn btn-primary ml-2 btn-sm rounded-circle" (click)="addManager()"><i
+                            class="fa fa-plus"></i></button>
+                </div>
+
+                <div formArrayName="technical_manager">
+                    <div *ngFor="let person of technical_manager.controls; let i=index">
+                        <div class="d-flex flex-row align-items-start" [formGroupName]="i">
+                            <app-input label="Email" class="w-100">
+                                <input class="form-control" formControlName="email" placeholder="exemplo@exemplo.com" autocomplete="off" type="email" />
+                            </app-input>
+
+                            <button class="btn btn-secondary btn-mg rm-contact rounded-circle" (click)="removeManager(i)">
+                                <i class="fa fa-remove"></i>
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+
+            <!-- Botões -->
+            <div class="text-center mb-4">
+                <button class="btn btn-primary btn-lg mr-1" type="submit " [disabled]="!locationForm.valid ">Cadastrar</button>
+                <button class="btn btn-secondary btn-lg custom-danger " type="reset " (click)="backPage() ">Cancelar    </button>
+            </div>
+
+        </form>
+
+
+
     </div>
-  </div>
 </div>
