@@ -107,7 +107,8 @@ input[type=number] {
 }
 
 .rm-contact {
-    border-radius: 0px 5px 5px 0px;
+    margin-top: 31px;
+    margin-left: 10px;
 }
 
 .rm-contact:hover {

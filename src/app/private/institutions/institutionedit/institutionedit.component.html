@@ -140,12 +140,12 @@
 
                 <div formArrayName="contact_people">
                     <div *ngFor="let person of contact_people.controls; let i=index">
-                        <div class="d-flex flex-row align-items-center" [formGroupName]="i">
+                        <div class="d-flex flex-row align-items-start" [formGroupName]="i">
                             <app-input label="Email" class="w-100">
                                 <input class="form-control" formControlName="email" placeholder="exemplo@exemplo.com" autocomplete="off" type="email" />
                             </app-input>
 
-                            <button class="btn btn-secondary btn-mg mt-3 rm-contact" (click)="removeContact(i)">
+                            <button class="btn btn-secondary btn-mg rm-contact rounded-circle" (click)="removeContact(i)">
                                 <i class="fa fa-remove"></i>
                             </button>
                         </div>
@@ -167,12 +167,12 @@
 
                 <div formArrayName="technical_manager">
                     <div *ngFor="let person of technical_manager.controls; let i=index">
-                        <div class="d-flex flex-row align-items-center" [formGroupName]="i">
+                        <div class="d-flex flex-row align-items-start" [formGroupName]="i">
                             <app-input label="Email" class="w-100">
                                 <input class="form-control" formControlName="email" placeholder="exemplo@exemplo.com" autocomplete="off" type="email" />
                             </app-input>
 
-                            <button class="btn btn-secondary btn-mg mt-3 rm-contact" (click)="removeManager(i)">
+                            <button class="btn btn-secondary btn-mg rm-contact rounded-circle" (click)="removeManager(i)">
                                 <i class="fa fa-remove"></i>
                             </button>
                         </div>
