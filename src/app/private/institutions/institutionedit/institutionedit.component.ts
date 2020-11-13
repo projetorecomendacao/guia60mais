@@ -43,9 +43,6 @@ export class InstitutioneditComponent implements OnInit {
             this.api.getOne(this.endPoint, this.id).subscribe(data => {
                 this.institution = data;
             });
-        
-        console.log("Contact People:");
-        console.log(this.contact_people);
     }
 
     update() {
@@ -79,50 +76,57 @@ export class InstitutioneditComponent implements OnInit {
     //     if (this.institution.id) this.api.update('institutions', this.institution.id, this.institution).subscribe(_ => this.institution[aux].splice(this.institution[aux].findIndex(value => value.id === id), 1));
     // }
 
-    get contact_people() {
-        return this.institutionForm.get('contact_people') as FormArray;
+    get email_people() {
+        return this.institutionForm.get('email_people') as FormArray;
     }
     
-    get technical_manager() {
-        return this.institutionForm.get('technical_manager') as FormArray;
+    get phone_people() {
+        return this.institutionForm.get('phone_people') as FormArray;
     }
 
     /*
      * @description: adiciona mais um campo para contato no form. 
      */
-    addContact() {
-        this.contact_people.push(this.createPerson());
+    addEmail() {
+        this.email_people.push(this.createEmail());
     }
 
     /*
      * @description: remove um campo para contato no form. 
      */
-    removeContact(index:number) {
-        this.contact_people.removeAt(index);
+    removeEmail(index:number) {
+        this.email_people.removeAt(index);
     }
 
     /*
      * @description: adiciona mais um campo para responsavel tecnico no form. 
      */
-    addManager() {
-        this.technical_manager.push(this.createPerson());
+    addPhone() {
+        this.phone_people.push(this.createPhone());
     }
 
     /*
      * @description: remove um campo para responsável tecnico no form. 
      */
-    removeManager(index:number) {
-        this.technical_manager.removeAt(index);
+    removePhone(index:number) {
+        this.phone_people.removeAt(index);
     }
 
     /*
      *@ description: cria um Form group para cadastro de pessoas.
      * Colocar dentro de um FormArray.
      */
-    createPerson(): FormGroup {
+    createEmail(): FormGroup {
         return this.formBuilder.group({
-            name: [''],
-            email: ['', [Validators.pattern(this.emailPattern)]]
+            name: ['', [Validators.required]],
+            email: ['', [Validators.required,Validators.pattern(this.emailPattern)]]
+        });
+    }
+
+    createPhone(): FormGroup {
+        return this.formBuilder.group({
+            name: ['', [Validators.required]],
+            number: ['', [Validators.required,Validators.pattern(this.numberPattern)]]
         });
     }
 
@@ -173,8 +177,7 @@ export class InstitutioneditComponent implements OnInit {
             capacity_used_f: ['', [Validators.pattern(this.numberPattern)]],
             contato: this.formBuilder.group({
                 email: ['', [Validators.required, Validators.pattern(this.emailPattern)]],
-                telefone: ['', [Validators.required, Validators.pattern(this.numberPattern)]],
-                fax: ['']
+                telefone: ['', [Validators.required, Validators.pattern(this.numberPattern)]]
             }),
             address: this.formBuilder.group({
                 address: ['', [Validators.required]],
@@ -184,11 +187,12 @@ export class InstitutioneditComponent implements OnInit {
                 city: ['', [Validators.required]],
                 state: ['', [Validators.required]],
                 country: ['', [Validators.required]],
+                reference_point: [''],
                 latitude: [''],
                 longitude: ['']
             }),
-            contact_people: this.formBuilder.array([this.createPerson()]), //criar um array de pessoas
-            technical_manager: this.formBuilder.array([this.createPerson()]), //criar um array de tecnicos
+            email_people: this.formBuilder.array([this.createEmail()]), //criar um array de pessoas
+            phone_people: this.formBuilder.array([this.createPhone()]), //criar um array de tecnicos
             legal_nature: [''],
             note: [''],
         });

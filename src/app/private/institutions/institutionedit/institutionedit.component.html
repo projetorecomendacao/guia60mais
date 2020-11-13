@@ -6,16 +6,19 @@
             <!-- Instituição -->
             <div class="row">
 
-                <app-input class="col-md-6" label="Nome da Instituição" errorMessage="Campo Obrigatório">
-                    <input class="form-control" formControlName="company_name" placeholder="Nome da Instituição" autocomplete="off" />
+                <app-input class="col-md-6" label="Razão Social" errorMessage="Campo Obrigatório">
+                    <input class="form-control" formControlName="company_name" placeholder="Razão Social"
+                        autocomplete="off" />
                 </app-input>
 
                 <app-input class="col-md-3" label="Nome Fantasia" errorMessage="Campo Obrigatório">
-                    <input class="form-control" formControlName="fantasy_name" placeholder="Nome Fantasia" autocomplete="off" />
+                    <input class="form-control" formControlName="fantasy_name" placeholder="Nome Fantasia"
+                        autocomplete="off" />
                 </app-input>
 
                 <app-input class="col-md-3" label="CNPJ" errorMessage="Campo Obrigatório">
-                    <input class="form-control" formControlName="cnpj" placeholder="XX.XXX.XXX/XXXX-XX" autocomplete="off" />
+                    <input class="form-control" formControlName="cnpj" placeholder="XX.XXX.XXX/XXXX-XX"
+                        autocomplete="off" />
                 </app-input>
             </div>
 
@@ -25,43 +28,49 @@
                 </app-input>
 
                 <app-input class="col-md-3" label="Público Alvo" errorMessage="Campo Obrigatório">
-                    <input class="form-control" formControlName="aimed_people" placeholder="Público Alvo" autocomplete="off" />
+                    <input class="form-control" formControlName="aimed_people" placeholder="Público Alvo"
+                        autocomplete="off" />
                 </app-input>
 
                 <app-input class="col-md-3" label="Idade Média do Público Alvo" errorMessage="Campo Obrigatório">
-                    <input class="form-control" formControlName="aimed_people_age" placeholder="XX" autocomplete="off" type="number" />
+                    <input class="form-control" formControlName="aimed_people_age" placeholder="XX" autocomplete="off"
+                        type="number" />
                 </app-input>
             </div>
 
-
             <hr>
-
 
             <!-- Capacidade -->
             <h5 class="text-center mb-1">Capacidade</h5>
             <div class="row">
                 <app-input class="col-md-4" label="Livre Total">
-                    <input class="form-control" formControlName="capacity_free" placeholder="XX" autocomplete="off" type="number" />
+                    <input class="form-control" formControlName="capacity_free" placeholder="XX" autocomplete="off"
+                        type="number" />
                 </app-input>
 
                 <app-input class="col-md-4" label="Livre Homens">
-                    <input class="form-control" formControlName="capacity_free_m" placeholder="XX" autocomplete="off" type="number" />
+                    <input class="form-control" formControlName="capacity_free_m" placeholder="XX" autocomplete="off"
+                        type="number" />
                 </app-input>
 
                 <app-input class="col-md-4" label="Livre Mulheres">
-                    <input class="form-control" formControlName="capacity_free_f" placeholder="XX" autocomplete="off" type="number" />
+                    <input class="form-control" formControlName="capacity_free_f" placeholder="XX" autocomplete="off"
+                        type="number" />
                 </app-input>
 
                 <app-input class="col-md-4" label="Utilizada Total">
-                    <input class="form-control" formControlName="capacity_used" placeholder="XX" autocomplete="off" type="number" />
+                    <input class="form-control" formControlName="capacity_used" placeholder="XX" autocomplete="off"
+                        type="number" />
                 </app-input>
 
                 <app-input class="col-md-4" label="Utilizada Homens">
-                    <input class="form-control" formControlName="capacity_used_m" placeholder="XX" autocomplete="off" type="number" />
+                    <input class="form-control" formControlName="capacity_used_m" placeholder="XX" autocomplete="off"
+                        type="number" />
                 </app-input>
 
                 <app-input class="col-md-4" label="Utilizada Mulheres">
-                    <input class="form-control" formControlName="capacity_used_f" placeholder="XX" autocomplete="off" type="number" />
+                    <input class="form-control" formControlName="capacity_used_f" placeholder="XX" autocomplete="off"
+                        type="number" />
                 </app-input>
             </div>
 
@@ -72,16 +81,77 @@
 
             <div class="row" formGroupName="contato">
                 <app-input class="col-md-6" label="Email" errorMessage="Campo Obrigatório">
-                    <input class="form-control" formControlName="email" placeholder="exemplo@exemplo.com" autocomplete="off" type="email" />
+                    <input class="form-control" formControlName="email" placeholder="exemplo@exemplo.com"
+                        autocomplete="off" type="email" />
                 </app-input>
 
-                <app-input class="col-md-3" label="Telefone" errorMessage="Campo Obrigatório">
-                    <input class="form-control" formControlName="telefone" placeholder="(XX)XXXXX-XXXX" autocomplete="off" />
+                <app-input class="col-md-6" label="Telefone" errorMessage="Campo Obrigatório">
+                    <input class="form-control" formControlName="telefone" placeholder="(XX)XXXXX-XXXX"
+                        autocomplete="off" />
                 </app-input>
+            </div>
 
-                <app-input class="col-md-3" label="Fax">
-                    <input class="form-control" formControlName="fax" placeholder="Fax" autocomplete="off" />
-                </app-input>
+            <hr>
+
+            <!-- Pessoas Contato -->
+            <div>
+                <div class="row justify-content-center">
+                    <h5 class="text-center mb-1">Outros Email's</h5>
+
+                    <button class="btn btn-primary ml-2 btn-sm rounded-circle" (click)="addEmail()"><i
+                            class="fa fa-plus"></i></button>
+                </div>
+
+                <div formArrayName="email_people">
+                    <div *ngFor="let person of email_people.controls; let i=index">
+                        <div class="d-flex flex-row align-items-center" [formGroupName]="i">
+                            <app-input label="Nome" class="w-50 pr-4">
+                                <input class="form-control" formControlName="name" placeholder="Nome..."
+                                    autocomplete="off" />
+                            </app-input>
+                            <app-input label="Email" class="w-50">
+                                <input class="form-control" formControlName="email" placeholder="exemplo@exemplo.com"
+                                    autocomplete="off" type="email" />
+                            </app-input>
+
+                            <button class="btn btn-secondary btn-mg mt-3 rm-contact" (click)="removeEmail(i)">
+                                <i class="fa fa-remove"></i>
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+
+            <div>
+                <div class="row justify-content-center">
+                    <h5 class="text-center mb-1">Outros Telefones</h5>
+
+                    <button class="btn btn-primary ml-2 btn-sm rounded-circle" (click)="addPhone()"><i
+                            class="fa fa-plus"></i></button>
+                </div>
+
+                <div formArrayName="phone_people">
+                    <div *ngFor="let person of phone_people.controls; let i=index">
+                        <div class="d-flex flex-row align-items-center" [formGroupName]="i">
+                            <app-input label="Nome" class="w-50 pr-4">
+                                <input class="form-control" formControlName="name" placeholder="Nome..."
+                                    autocomplete="off" />
+                            </app-input>
+                            <app-input label="Numero" class="w-50">
+                                <input class="form-control" formControlName="number" placeholder="(XX)XXXX-XXXX"
+                                    autocomplete="off" />
+                            </app-input>
+
+                            <button class="btn btn-secondary btn-mg mt-3 rm-contact" (click)="removePhone(i)">
+                                <i class="fa fa-remove"></i>
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
             </div>
 
             <hr>
@@ -89,13 +159,13 @@
             <!-- Endereço -->
             <h5 class="text-center mb-1">Endereço</h5>
             <div class="row" formGroupName="address">
-
-                <app-input class="col-md-5" label="Endereço" errorMessage="Campo Obrigatório">
-                    <input class="form-control" formControlName="address" placeholder="Endereço" autocomplete="off" />
+                <app-input class="col-md-5" label="Logradouro" errorMessage="Campo Obrigatório">
+                    <input class="form-control" formControlName="address" placeholder="Logradouro" autocomplete="off" />
                 </app-input>
 
                 <app-input class="col-md-2" label="Número" errorMessage="Campo Obrigatório">
-                    <input class="form-control" formControlName="number" placeholder="XX" autocomplete="off" type="number" />
+                    <input class="form-control" formControlName="number" placeholder="XX" autocomplete="off"
+                        type="number" />
                 </app-input>
 
                 <app-input class="col-md-5" label="Bairro" errorMessage="Campo Obrigatório">
@@ -118,58 +188,39 @@
                     <input class="form-control" formControlName="country" placeholder="País" autocomplete="off" />
                 </app-input>
 
-                <app-input class="col-md-2" label="Latitude">
+                <app-input class="col-md-6" label="Ponto de Referência" errorMessage="Campo Obrigatório">
+                    <input class="form-control" formControlName="reference_point" placeholder="Ponto de Referência"
+                        autocomplete="off" />
+                </app-input>
+
+                <app-input class="col-md-3" label="Latitude">
                     <input class="form-control" formControlName="latitude" placeholder="Latitude" autocomplete="off" />
                 </app-input>
 
-                <app-input class="col-md-2" label="Longitude">
-                    <input class="form-control" formControlName="longitude" placeholder="Longitude" autocomplete="off" />
+                <app-input class="col-md-3" label="Longitude">
+                    <input class="form-control" formControlName="longitude" placeholder="Longitude"
+                        autocomplete="off" />
                 </app-input>
-            </div>
-
-            <hr>
-
-            <!-- Pessoas Contato -->
-
-            <div>
-                <div class="row justify-content-center">
-                    <h5 class="text-center mb-1">Pessoas Para Contato</h5>
-
-                    <button class="btn btn-primary ml-2 btn-sm rounded-circle" (click)="addContact()"><i class="fa fa-plus"></i></button>
-                </div>
-
-                <div formArrayName="contact_people">
-                    <div *ngFor="let person of contact_people.controls; let i=index">
-                        <div class="d-flex flex-row align-items-center" [formGroupName]="i">
-                            <app-input label="Email" class="w-100">
-                                <input class="form-control" formControlName="email" placeholder="exemplo@exemplo.com" autocomplete="off" type="email" />
-                            </app-input>
-
-                            <button class="btn btn-secondary btn-mg mt-3 rm-contact" (click)="removeContact(i)">
-                                <i class="fa fa-remove"></i>
-                            </button>
-                        </div>
-
-                    </div>
-                </div>
             </div>
 
             <hr>
 
             <!-- Tecnicos Contato -->
-
+            <!-- 
             <div>
                 <div class="row justify-content-center">
                     <h5 class="text-center mb-1">Responsáveis Técnicos</h5>
 
-                    <button class="btn btn-primary ml-2 btn-sm rounded-circle" (click)="addManager()"><i class="fa fa-plus"></i></button>
+                    <button class="btn btn-primary ml-2 btn-sm rounded-circle" (click)="addManager()"><i
+                            class="fa fa-plus"></i></button>
                 </div>
 
                 <div formArrayName="technical_manager">
                     <div *ngFor="let person of technical_manager.controls; let i=index">
                         <div class="d-flex flex-row align-items-center" [formGroupName]="i">
                             <app-input label="Email" class="w-100">
-                                <input class="form-control" formControlName="email" placeholder="exemplo@exemplo.com" autocomplete="off" type="email" />
+                                <input class="form-control" formControlName="email" placeholder="exemplo@exemplo.com"
+                                    autocomplete="off" type="email" />
                             </app-input>
 
                             <button class="btn btn-secondary btn-mg mt-3 rm-contact" (click)="removeManager(i)">
@@ -181,23 +232,31 @@
                 </div>
             </div>
 
-            <hr>
+            <hr> -->
 
             <!-- Informações -->
 
             <h5 class="text-center mb-1">Informações</h5>
             <app-input label="Natureza Legal">
-                <input class="form-control" formControlName="legal_nature" placeholder="Natureza Legal" autocomplete="off" />
+                <input class="form-control" formControlName="legal_nature" placeholder="Natureza Legal"
+                    autocomplete="off" />
             </app-input>
 
+            <!-- 
             <app-input label="Observações">
                 <input class="form-control" formControlName="note" placeholder="Observações..." autocomplete="off" />
-            </app-input>
+            </app-input> -->
+
+            <div formControlArray="days_function">
+                <input type="checkbox" formControlName="monday"/>
+            </div>
 
             <!-- Botões -->
             <div class="text-center mb-4">
-                <button class="btn btn-primary btn-lg mr-1" type="submit " [disabled]="!institutionForm.valid ">Cadastrar</button>
-                <button class="btn btn-secondary btn-lg custom-danger " type="reset " (click)="backPage() ">Cancelar    </button>
+                <button class="btn btn-primary btn-lg mr-1" type="submit "
+                    [disabled]="!institutionForm.valid ">Cadastrar</button>
+                <button class="btn btn-secondary btn-lg custom-danger " type="reset " (click)="backPage() ">Cancelar
+                </button>
             </div>
         </form>
     </div>
