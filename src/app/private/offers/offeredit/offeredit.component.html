@@ -1,1 +1,96 @@
-<p>offeredit works!</p>
+<div class="container">
+    <h2 class="text-center my-2 mb-1">Cadastro de Ofertas</h2>
+    <div class="col">
+        <p class="required text-right col-12">Campos Obrigatórios (*)</p>
+        <form [formGroup]="offerForm" (ngSubmit)="onSubmit()">
+
+            <div class="row">
+                <!-- Trocar por Radio Button -->
+                <app-input class="col-md-2" label="Matricula Aberta">
+                    <input class="form-control" formControlName="open_enrol" />
+                </app-input>
+
+                <!-- Default unchecked -->
+                <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+                <label for="vehicle1"> I have a bike</label><br>
+
+
+                <!-- Trocar por Radio Button -->
+                <app-input class="col-md-2" label="Ambiente">
+                    <input class="form-control" formControlName="environment" />
+                </app-input>
+
+                <!-- Trocar por Radio Button -->
+                <app-input class="col-md-2" label="Fluxo Contínuo">
+                    <input class="form-control" formControlName="continuous_flow" />
+                </app-input>
+
+                <!-- Fazer Sumir data inicial e final se for fluxo continuo -->
+                <!-- Trocar por Calendário -->
+                <app-input class="col-md-2" label="Data Inicial">
+                    <input class="form-control" formControlName="start_date" />
+                </app-input>
+
+                <!-- Trocar por Calendário -->
+                <app-input class="col-md-2" label="Data Final">
+                    <input class="form-control" formControlName="final_date" />
+                </app-input>
+
+                <!-- Verificar como fazer -->
+                <app-input class="col-md-2" label="Horários">
+                    <input class="form-control" formControlName="time" autocomplete="off" />
+                </app-input>
+
+            </div>
+
+            <div class="row">
+                <app-input class="col-md-6" label="Objetivos Específicos">
+                    <input class="form-control" formControlName="specific_aim" placeholder="Objetivos Específicos"
+                        autocomplete="off" />
+                </app-input>
+
+                <app-input class="col-md-2" label="Custo">
+                    <input class="form-control" formControlName="value" placeholder="R$ XX,XX" autocomplete="off" />
+                </app-input>
+
+                <!-- Verificar a necessidade da troca por Radio Button -->
+                <!-- Verificar a necessidade de colocar um outro campo -->
+                <app-input class="col-md-2" label="Tipo de Isenção">
+                    <input class="form-control" formControlName="excemption" placeholder="Tipo de isenção..." />
+                </app-input>
+
+            </div>
+
+            <div class="row">
+                <app-input class="col-md-4" label="Requisitos">
+                    <input class="form-control" formControlName="requirements" placeholder="Requisitos..."
+                        autocomplete="off" />
+                </app-input>
+
+                <app-input class="col-md-4" label="Envelhecimento Saudável">
+                    <input class="form-control" formControlName="healthy_aging" placeholder="Requisitos..."
+                        autocomplete="off" />
+                </app-input>
+
+                <app-input class="col-md-4" label="Atendimento Domiciliar">
+                    <input class="form-control" formControlName="home_care" placeholder="Home care..."
+                        autocomplete="off" />
+                </app-input>
+
+            </div>
+
+            <div class="row">
+                <app-input class="col-md-6" label="Parceiros">
+                    <input class="form-control" formControlName="partners" placeholder="Parceiros..."
+                        autocomplete="off" />
+                </app-input>
+
+                <app-input class="col-md-6" label="Comentários">
+                    <input class="form-control" formControlName="comments" placeholder="Deixe aqui o seu comentário..."
+                        autocomplete="off" />
+                </app-input>
+            </div>
+
+        </form>
+    </div>
+</div>

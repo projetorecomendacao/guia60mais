@@ -1,3 +1,4 @@
+import { variable } from '@angular/compiler/src/output/output_ast';
 import { AfterContentInit, Component, ContentChild, Input, OnInit } from '@angular/core';
 import { FormControlName, NgModel } from '@angular/forms';
 
@@ -27,6 +28,7 @@ export class InputComponent implements OnInit, AfterContentInit {
         if (this.input === undefined) {
             throw new Error('Esse componente precisa ser usado como uma diretiva ngModel ou formControlName!');
         }
+
     }
 
     //Caso o input tenha sido preenchido corretamente
@@ -37,5 +39,13 @@ export class InputComponent implements OnInit, AfterContentInit {
     //Caso o input tenha sido preenchido de maneira incorreta
     hasError(): boolean {
         return this.input.invalid && (this.input.dirty || this.input.touched)
+    }
+
+    isRequired(): boolean {
+        if (this.input.errors == null) {
+            return false;
+        }
+
+        return this.input.errors.required;
     }
 }

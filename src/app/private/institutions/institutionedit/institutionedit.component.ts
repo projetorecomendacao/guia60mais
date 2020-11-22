@@ -169,6 +169,7 @@ export class InstitutioneditComponent implements OnInit {
             goal: [''],
             aimed_people: ['', [Validators.required]],
             aimed_people_age: ['', [Validators.required, Validators.pattern(this.numberPattern)]],
+            main_atuaction_field: ['', [Validators.required]],
             capacity_free: ['', [Validators.pattern(this.numberPattern)]],
             capacity_free_m: ['', [Validators.pattern(this.numberPattern)]],
             capacity_free_f: ['', [Validators.pattern(this.numberPattern)]],
@@ -191,8 +192,8 @@ export class InstitutioneditComponent implements OnInit {
                 latitude: [''],
                 longitude: ['']
             }),
-            email_people: this.formBuilder.array([this.createEmail()]), //criar um array de pessoas
-            phone_people: this.formBuilder.array([this.createPhone()]), //criar um array de tecnicos
+            email_people: this.formBuilder.array([]), //criar um array de pessoas
+            phone_people: this.formBuilder.array([]), //criar um array de tecnicos
             legal_nature: [''],
             note: [''],
         });

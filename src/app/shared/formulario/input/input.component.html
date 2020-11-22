@@ -1,6 +1,7 @@
 <div class="form-group custom-input" [class.error]="hasError()">
+    <!-- {{ input.errors.required }} -->
     <label>
-        {{label}}: <span class="required">*</span>
+        {{label}}: <span class="required" *ngIf="isRequired()">*</span>
     </label>
 
     <ng-content></ng-content>
